@@ -72,7 +72,7 @@ window.DATA_NODES = [
   { id:"zhouyu-juelun", name:"此曲堪称绝伦(周绝伦)", type:"quote", faction:"wu", actor:"周瑜", ep:"乔家听琴", line:"(听完大小乔弹琴) 此曲堪称绝伦！", why:"为听琴原创大段狗血戏,周瑜得名周绝伦。", pop:2, r9:false, clip:"", contrast:"—" },
   { id:"huanggai", name:"周瑜!我的小儿!", type:"quote", faction:"wu", actor:"黄盖", ep:"苦肉计", line:"周瑜！我的小儿！我死了也不服你！", why:"认爹式怒骂,周瑜打黄盖变父子局。", pop:3, r9:false, clip:"", contrast:"—" },
   { id:"lvmeng-heiyi", name:"黑衣渡江(两栖蜘蛛侠)", type:"scene", faction:"wu", actor:"吕蒙军", ep:"白衣渡江魔改", line:"(夜行衣士兵徒手爬城墙)", why:"白衣渡江改夜行衣特种兵空降,被嘲两栖蜘蛛侠。", pop:2, r9:false, clip:"", contrast:"演义=白衣渡江" },
-  { id:"lushu-zuile", name:"我也是醉了(鲁肃)", type:"quote", faction:"wu", actor:"鲁肃", ep:"周瑜小乔合奏", line:"公瑾与小乔合奏…我陶醉了。", why:"'我也是醉了'网络语撞车,听起来像穿越。", pop:2, r9:false, clip:"", contrast:"—" },
+  { id:"lushu-zuile", name:"我也是醉了(鲁肃·二创)", type:"quote", faction:"wu", actor:"鲁肃", ep:"—", line:"(无原句)公瑾与小乔合奏…我陶醉了。", why:"'我也是醉了'网络语被网友配到鲁肃脸上;95集whisper全检索无原句(陶醉仅ep11曹操),系网友二创演绎,非剧中台词。", pop:2, r9:true, noCut:"网友二创演绎,原片无此句,不裁剪", clip:"", contrast:"—" },
   { id:"luxun-shanliang", name:"夷陵山脉最后一道山梁", type:"quote", faction:"wu", actor:"陆逊", ep:"夷陵之战", line:"那→就→是→夷陵→山→脉→最→后→一→道→山→梁→(AI腔)", why:"机器人语速+大混响,陆逊被封赛博坦人。", pop:3, r9:false, clip:"", contrast:"—" },
 
   // ============ 群像/其他势力 ============
@@ -96,7 +96,7 @@ window.DATA_NODES = [
   { id:"changle", name:"长乐宫连锁店", type:"prop", faction:"zahu", actor:"—", ep:"全剧", line:"(洛阳/许昌/兖州都挂'长乐宫')", why:"皇宫牌匾全叫长乐宫,像连锁店;兼用卡复用。", pop:2, r9:false, clip:"", contrast:"实拍横店秦王宫/涿州影视城" },
   { id:"yuxi", name:"玉玺是蛋糕(传国玉玺道具)", type:"prop", faction:"zahu", actor:"—", ep:"得玉玺", line:"(双手捧起比脸大的玉玺)", why:"道具大如蛋糕,像有心灵控制力(至尊魔戒梗)。", pop:3, r9:false, clip:"", contrast:"史载'方圆四寸'很小" },
   { id:"sungan", name:"百变孙乾(文关羽)", type:"cast", faction:"zahu", actor:"杨瑞", ep:"全剧", line:"(同一张脸演遍小兵/大臣/关羽替身)", why:"杨瑞=孙乾=守门兵=关羽文戏替身,整部剧都是他演的。", pop:3, r9:true, clip:"", contrast:"—" },
-  { id:"yuguanyu", name:"文关羽武关羽(替身宇宙)", type:"cast", faction:"zahu", actor:"于荣光缺席", ep:"全剧", line:"(关羽远景全是替身)", why:"于荣光常不在,孙乾(文)周仓(武)轮流当替身。", pop:3, r9:false, clip:"", contrast:"—" },
+  { id:"yuguanyu", name:"文关羽武关羽(替身宇宙)", type:"cast", faction:"zahu", actor:"于荣光缺席", ep:"全剧", line:"(关羽远景/打戏全是替身)", why:"于荣光档期常不在,文戏替身=孙乾(杨瑞),武戏替身=周仓(张胜阳);需跨集对比才能看出,单点无独立台词。", pop:3, r9:false, noCut:"全剧跨集现象(替身破绽需多集对比),不做单点剪辑,建议合集展示页", clip:"", contrast:"—" },
   { id:"guanyuzhige", name:"关羽之歌(蜀国国歌)", type:"prop", faction:"zahu", actor:"BGM", ep:"全剧", line:"(一段旋律渲染一切场合)", why:"激昂悲壮言情全用它,弹幕刷'释怀了'。", pop:3, r9:false, clip:"", contrast:"neta苏维埃进行曲叫'蜀维埃'" },
   { id:"baxigui", name:"巴西龟占卜(上上大吉)", type:"prop", faction:"zahu", actor:"刘备", ep:"三顾前", line:"(摇龟壳倒扣)大吉呀，上上大吉呀！", why:"龟甲占卜用巴西龟(入侵物种)+笅杯式丢法。", pop:2, r9:false, clip:"", contrast:"商周灼龟法,唐以后才有笅杯" },
 ];

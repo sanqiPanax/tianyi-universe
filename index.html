@@ -60,6 +60,29 @@
   #player .p-close:hover{color:#fff}
   #player .ph{font-size:12px;color:#8a93a6;line-height:1.5}
   #count{font-size:11px;color:var(--muted);margin-top:8px}
+  /* 台词/梗搜索框 */
+  #searchWrap{position:relative}
+  #searchInput{width:168px;font-size:12px;padding:5px 11px;border-radius:14px;border:1px solid #33415e;
+    background:#0d1424e6;color:#cdd6e4;outline:none;transition:.15s}
+  #searchInput::placeholder{color:#5a6478}
+  #searchInput:focus{border-color:#7aa2ff;box-shadow:0 0 8px #3555b3aa;width:210px}
+  #searchRes{position:absolute;top:32px;right:0;width:350px;max-width:88vw;max-height:430px;overflow-y:auto;
+    background:#0b1020f7;border:1px solid #3c4f77;border-radius:10px;display:none;font-size:12px;z-index:30;
+    box-shadow:0 8px 26px #000d;backdrop-filter:blur(4px)}
+  .res-group{color:#7aa2ff;padding:6px 12px 3px;font-weight:600;font-size:11px;letter-spacing:1px;
+    border-top:1px solid #16233f;position:sticky;top:0;background:#0b1020f7}
+  .res-group:first-child{border-top:none}
+  .res-item{display:block;width:100%;text-align:left;border:none;background:none;cursor:pointer;
+    padding:6px 12px;color:#cdd6e4;line-height:1.55;font-size:12px;font-family:inherit}
+  .res-item:hover{background:#16233f}
+  .res-item .t{color:#eef2fa}
+  .res-item .m{color:#8a93a6;font-size:11px;display:block}
+  .res-item .hl{color:#ffd479}
+  .res-more{color:#5a6478;padding:3px 12px 9px;font-size:11px}
+  #toast{position:fixed;left:50%;bottom:58px;transform:translateX(-50%);z-index:40;background:#1b2b4df5;
+    border:1px solid #7aa2ff;color:#eaf1ff;font-size:12px;padding:8px 16px;border-radius:14px;
+    box-shadow:0 4px 18px #000c;display:none;max-width:80vw;line-height:1.6}
+  @media(max-width:720px){ #searchRes{right:auto;left:0} }
   /* 开场 */
   #splash{position:fixed;inset:0;z-index:20;background:radial-gradient(ellipse at center,#0a1022 0%,#03050c 70%);
     display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;text-align:center;padding:20px}
@@ -92,6 +115,12 @@
   <h1><span class="ti">天 意</span> 宇 宙</h1>
   <p>新三国梗互动图谱 · 每个星体都是一段天意侵蚀的证据</p>
 </div>
+
+<div id="searchWrap">
+  <input id="searchInput" placeholder="🔍 搜台词 / 梗名…" autocomplete="off">
+  <div id="searchRes"></div>
+</div>
+<div id="toast"></div>
 
 <div id="toolbar">
   <div class="btn" id="btn-play">▶ 漫游</div>
@@ -155,12 +184,15 @@
 <script src="data/nodes.js"></script>
 <script src="data/links.js"></script>
 <script src="data/clips.js"></script>
+<script src="data/script_index.js"></script>
 <script>
 (() => {
 "use strict";
 const NODES = window.DATA_NODES || [];
 const LINKS = window.DATA_LINKS || [];
 const CLIPS = window.DATA_CLIPS || {};  // id -> {mp3/mp4} 有素材标记
+const SCRIPT = window.DATA_SCRIPT || {}; // ep -> ["秒 文本", ...] 全剧台词
+const SCRIPT_EPS = Object.keys(SCRIPT).sort(); // 按词典序 ep01..ep95 正好时间序
 const FCOLOR = { wei:"#d4a017", shu:"#c0392b", wu:"#2c7fb8", qun:"#8e44ad", jizhi:"#c8d6e5", zahu:"#5d6d7e", cast:"#e67e22" };
 const TYPE_NAME = { quote:"台词梗", scene:"名场面", mech:"天意机制", prop:"服化道/拍摄", cast:"演员/幕后" };
 const KCOLOR = { hui:"#ff6b6b", hu:"#ffa94d", xiu:"#51cf66", jian:"#4dabf7", yan:"#da77f2", yuan:"#ffe066", quan:"#63e6be", er:"#f783ac" };
@@ -291,7 +323,9 @@ function openNode(d){
   html += `<div class="field"><b>素材播放</b><br>`;
   html += hasClip
     ? `<button class="btn" onclick="window.__play('${esc(d.id)}')">▶ 播放原片片段</button>`
-    : `<span class="muted" style="font-size:12px">⏳ 素材待剪辑(定位后在 clips/ 放 ${esc(d.id)}.mp3/.mp4 即自动生效)</span>`;
+    : (d.noCut
+      ? `<span class="muted" style="font-size:12px">🔍 ${esc(d.noCut)}</span>`
+      : `<span class="muted" style="font-size:12px">⏳ 素材待剪辑(定位后在 clips/ 放 ${esc(d.id)}.mp3/.mp4 即自动生效)</span>`);
   html += `</div>`;
   html += `<div class="field" style="font-size:12px;color:#5a6478">节点ID: ${esc(d.id)} · 剪辑文件名: clips/${esc(d.id)}.mp3/.mp4</div>`;
   openPanel(html);
@@ -317,6 +351,134 @@ window.__play = (id)=>{
   player.style.display='block';
 };
 document.getElementById('playerClose').onclick = ()=>{ document.getElementById('player').style.display='none'; const b=document.getElementById('playerBody'); b.innerHTML=''; };
+
+// ---------- toast 轻提示 ----------
+let toastTimer=null;
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.innerHTML=msg; t.style.display='block';
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>{ t.style.display='none'; }, 3200);
+}
+
+// ---------- 播放:支持 "ep + 秒" 直接定位到源片(需本地有 新三国/ 源文件) ----------
+window.__playAt = (ep, sec)=>{
+  const n = parseInt(ep.replace(/\D/g,''),10);
+  if(!n || n<1 || n>95) return;
+  const file = `新三国/新三国${String(n).padStart(2,'0')}.mkv`;
+  const player = document.getElementById('player');
+  const body = document.getElementById('playerBody');
+  document.getElementById('playerTitle').textContent = `第${n}集 @ ${sec}s · 定位播放`;
+  body.innerHTML = `<video controls autoplay src="${file}#t=${sec}"></video><div class="p-title" style="margin-top:6px">正在从 ${sec}s 播放 · 若黑屏说明本地缺源片</div>`;
+  player.style.display='block';
+};
+
+// ---------- 搜索框(搜梗节点 + 搜全剧台词) ----------
+const searchInput = document.getElementById('searchInput');
+const searchRes = document.getElementById('searchRes');
+let searchTimer = null;
+function hl(text, kw){
+  if(!kw) return esc(text);
+  const i = text.toLowerCase().indexOf(kw.toLowerCase());
+  if(i<0) return esc(text);
+  return esc(text.slice(0,i)) + `<span class="hl">${esc(text.slice(i,i+kw.length))}</span>` + esc(text.slice(i+kw.length));
+}
+function runSearch(){
+  const kw = searchInput.value.trim();
+  const box = searchRes;
+  if(!kw){ box.style.display='none'; return; }
+  const lower = kw.toLowerCase();
+  // --- 1) 梗节点命中 ---
+  const nodeHits = NODES.filter(n =>
+    (n.name||'').toLowerCase().includes(lower) ||
+    (n.line||'').toLowerCase().includes(lower) ||
+    (n.why||'').toLowerCase().includes(lower) ||
+    (n.actor||'').toLowerCase().includes(lower) ||
+    (n.id||'').toLowerCase().includes(lower));
+  // --- 2) 全剧台词命中(每集最多记 6 条,总上限 14) ---
+  const kwClean = kw.replace(/[\s""'']/g,'');
+  const scriptHits = [];
+  if(kwClean){
+    outer:
+    for(const ep of SCRIPT_EPS){
+      const arr = SCRIPT[ep];
+      if(!arr) continue;
+      let cnt = 0;
+      for(const row of arr){
+        const sp = row.indexOf(' ');
+        const sec = row.slice(0, sp);
+        const txt = row.slice(sp+1);
+        const low = txt.toLowerCase();
+        // 词组匹配:文本含关键词即命中(不分词)
+        if(low.includes(lower) || txt.includes(kwClean)){
+          scriptHits.push({ ep, sec: parseInt(sec,10), txt });
+          if(++cnt >= 6) break;
+        }
+        if(scriptHits.length >= 14) break outer;
+      }
+    }
+  }
+  // --- 渲染 ---
+  let h = '';
+  if(!nodeHits.length && !scriptHits.length){
+    h = `<div class="res-more" style="padding:14px 12px">无命中。试试演员名 / 台词词 / 梗名。</div>`;
+  }
+  if(nodeHits.length){
+    h += `<div class="res-group">梗节点 ${nodeHits.length}</div>`;
+    for(const n of nodeHits.slice(0,8)){
+      const clipMark = (CLIPS[n.id] && (CLIPS[n.id].mp3||CLIPS[n.id].mp4)) ? ' 🎵' : '';
+      h += `<button class="res-item" onclick="goNode('${esc(n.id)}')">
+        <span class="t">${hl(n.name,kw)}${clipMark}</span>
+        <span class="m">${esc((n.actor||'')+' · '+(n.ep||''))}</span>
+        ${n.line?`<span class="m">${hl(n.line,kw)}</span>`:''}
+      </button>`;
+    }
+    if(nodeHits.length>8) h += `<div class="res-more">…还有 ${nodeHits.length-8} 个梗节点</div>`;
+  }
+  if(scriptHits.length){
+    h += `<div class="res-group">原片台词(第${(scriptHits[0].ep||'').replace('ep','')}集起…)</div>`;
+    for(const s of scriptHits.slice(0,10)){
+      h += `<button class="res-item" onclick="playScript('${s.ep}','${s.sec}')">
+        <span class="t">${hl(s.txt,kw)}</span>
+        <span class="m">第${s.ep.replace('ep','')}集 · ${s.sec}s · 点击定位播放</span>
+      </button>`;
+    }
+    if(scriptHits.length>10) h += `<div class="res-more">…还有 ${scriptHits.length-10} 条</div>`;
+  }
+  box.innerHTML = h;
+  box.style.display = 'block';
+}
+// 命中梗节点:关搜索框 → 复位/聚焦该星体 → 开档案
+window.goNode = (id)=>{
+  searchRes.style.display='none'; searchInput.value='';
+  const real = NODES.find(n=>n.id===id); if(!real) return;
+  // 若当前筛选模式不含该节点,先切回"全部"
+  const inMode = mode==='all' || (mode==='pop' ? (real.pop||1)>=4 : real.r9);
+  if(!inMode){ mode='all'; paintBtns(); applyFilter(); }
+  const cur = simulation.nodes().find(n=>n.id===id);
+  if(cur){
+    const k = Math.max(d3.zoomTransform(svgRoot.node()).k, 1.4);
+    svgRoot.transition().duration(800).call(zoom.transform,
+      d3.zoomIdentity.translate(innerWidth/2, innerHeight/2).scale(k).translate(-cur.x, -cur.y));
+  }
+  openNode(real);
+};
+// 命中原片台词:定位播放(黑屏即本地无源片,提示去 新三国/ 放 mkv)
+window.playScript = (ep, sec)=>{
+  searchRes.style.display='none';
+  const n = ep.replace('ep','');
+  const file = `新三国/新三国${n}.mkv`;
+  toast(`正在从第 <b>${n}</b> 集 <b>${sec}s</b> 定位播放…`);
+  window.__playAt(ep, sec);
+};
+searchInput.addEventListener('input', ()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(runSearch, 160); });
+searchInput.addEventListener('keydown', (e)=>{
+  if(e.key==='Enter'){ runSearch(); const first=searchRes.querySelector('.res-item'); if(first) first.click(); }
+  if(e.key==='Escape'){ searchRes.style.display='none'; searchInput.blur(); }
+});
+document.addEventListener('click', (e)=>{
+  if(!e.target.closest('#searchWrap')) searchRes.style.display='none';
+});
 
 // ---------- tip ----------
 const tipEl = document.getElementById('tip');

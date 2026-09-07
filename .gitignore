@@ -1,0 +1,15 @@
+# 排除本地素材(版权/超大,不上传)
+新三国/
+clips/
+clips.json
+
+# 临时与系统
+*.tmp
+Thumbs.db
+.DS_Store
+
+# 本地运行产物(可选上传时打开)
+tools/_full/
+tools/_test*.wav
+tools/qc.txt
+tools/__pycache__/

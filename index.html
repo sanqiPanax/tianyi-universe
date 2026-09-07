@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天意宇宙 · 新三国梗互动图谱</title>
+<style>
+  :root{
+    --wei:#d4a017; --shu:#c0392b; --wu:#2c7fb8; --qun:#8e44ad; --jizhi:#c8d6e5;
+    --zahu:#5d6d7e; --cast:#e67e22;
+    --bg:#03050c; --panel:#0b1020f2; --text:#e6e6e6; --muted:#8a93a6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);
+    font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif}
+  #starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
+  #graph{position:fixed;inset:0;z-index:1}
+  #graph svg{width:100%;height:100%;display:block}
+  /* 标题 */
+  #title{position:fixed;top:14px;left:18px;z-index:5;pointer-events:none}
+  #title h1{font-size:22px;letter-spacing:3px;font-weight:700;text-shadow:0 0 18px rgba(120,160,255,.5)}
+  #title h1 .ti{color:#9fc3ff}
+  #title p{font-size:12px;color:var(--muted);margin-top:3px;letter-spacing:1px}
+  /* 顶部控制条 */
+  #toolbar{position:fixed;top:14px;right:18px;z-index:5;display:flex;gap:8px;align-items:center;flex-wrap:wrap;max-width:70%}
+  .btn{cursor:pointer;user-select:none;font-size:12px;padding:5px 12px;border-radius:14px;
+    border:1px solid #33415e;background:#0d1424e6;color:#cdd6e4;transition:.15s}
+  .btn:hover{border-color:#6d8bd6;color:#fff}
+  .btn.on{background:#1b2b4d;border-color:#7aa2ff;color:#fff;box-shadow:0 0 8px #3555b3aa}
+  /* 图例 */
+  #legend{position:fixed;left:18px;bottom:18px;z-index:5;font-size:11px;color:#aeb8cc;line-height:1.7;
+    background:#0a101fe0;border:1px solid #26334d;padding:8px 12px;border-radius:8px;max-width:260px}
+  #legend b{display:block;margin-bottom:2px;color:#e3e8f2}
+  #legend .row{display:flex;align-items:center;gap:6px;white-space:nowrap}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:0 0 auto}
+  .line-sample{width:18px;height:0;border-top:2px solid #666;display:inline-block;flex:0 0 auto}
+  /* 连线小纸条 */
+  #tip{position:fixed;z-index:6;background:#0c1322f5;border:1px solid #3c4f77;border-radius:8px;
+    padding:10px 14px;font-size:13px;max-width:300px;display:none;pointer-events:none;box-shadow:0 4px 20px #000a}
+  #tip .k{color:#ffd479;font-weight:600;margin-bottom:4px}
+  /* 节点详情侧栏 */
+  #panel{position:fixed;top:0;right:-460px;width:440px;max-width:94vw;height:100vh;z-index:8;
+    background:var(--panel);backdrop-filter:blur(6px);border-left:1px solid #2b3a58;
+    transition:right .25s ease;overflow-y:auto;padding:22px 20px 90px}
+  #panel.open{right:0}
+  #panel .close{position:sticky;top:0;float:right;cursor:pointer;font-size:22px;color:#8892a6}
+  #panel .close:hover{color:#fff}
+  #panel h2{font-size:20px;margin-bottom:4px;padding-right:26px}
+  #panel .sub{color:var(--muted);font-size:12px;margin-bottom:12px}
+  .tag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:10px;margin:2px 4px 2px 0;border:1px solid}
+  .quote-block{margin:12px 0;padding:12px 14px;border-left:3px solid #7aa2ff;background:#0a0f1ecc;border-radius:4px;font-size:14px;line-height:1.6}
+  .field{margin:10px 0;font-size:13px;line-height:1.7}
+  .field b{color:#c9d3e8;font-weight:600}
+  .field .muted{color:var(--muted)}
+  #player{position:fixed;bottom:18px;right:18px;z-index:9;background:#0d1526ee;border:1px solid #3c4f77;border-radius:10px;padding:10px 14px;display:none;max-width:420px}
+  #player audio{width:260px;height:30px}
+  #player video{max-width:380px;max-height:300px;display:block;border-radius:6px}
+  #player .p-title{font-size:12px;margin-bottom:6px;color:#cfe0ff}
+  #player .p-close{cursor:pointer;float:right;color:#8892a6;font-size:14px}
+  #player .p-close:hover{color:#fff}
+  #player .ph{font-size:12px;color:#8a93a6;line-height:1.5}
+  #count{font-size:11px;color:var(--muted);margin-top:8px}
+  /* 开场 */
+  #splash{position:fixed;inset:0;z-index:20;background:radial-gradient(ellipse at center,#0a1022 0%,#03050c 70%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;text-align:center;padding:20px}
+  #splash .big{font-size:38px;letter-spacing:10px;color:#cfe0ff;text-shadow:0 0 30px #4a6ecb}
+  #splash .big .ti{color:#7aa2ff}
+  #splash .sub{color:#8892a6;margin-top:14px;font-size:14px;line-height:2;letter-spacing:1px}
+  #splash .enter{margin-top:26px;font-size:15px;color:#0b1020;background:linear-gradient(135deg,#8fb2ff,#4a6ecb);
+    padding:10px 34px;border-radius:22px;font-weight:700;letter-spacing:4px;box-shadow:0 0 24px #3555b388}
+  #splash .warn{margin-top:18px;font-size:11px;color:#5a6478;line-height:1.7}
+  /* 图元素 */
+  .node{cursor:pointer}
+  .node .halo{fill:none;stroke-width:1;opacity:.5}
+  .node:hover .core{stroke:#fff;stroke-width:2}
+  .link{opacity:.5}
+  .link:hover{opacity:.9}
+  .lbl{font-size:10px;fill:#c9d3e8;pointer-events:none;paint-order:stroke;stroke:#02040a;stroke-width:3px}
+  /* 操作提示 */
+  #hint{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:6;display:flex;gap:14px;
+    font-size:11px;color:#9aa6bd;background:#0a101fd0;border:1px solid #26334d;padding:6px 16px;border-radius:14px;white-space:nowrap}
+  #hint span{display:inline-flex;align-items:center}
+  @media(max-width:860px){ #hint{display:none} }
+  @media(max-width:720px){ #title h1{font-size:17px} #legend{display:none} #toolbar{max-width:75%} }
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="graph"></div>
+
+<div id="title">
+  <h1><span class="ti">天 意</span> 宇 宙</h1>
+  <p>新三国梗互动图谱 · 每个星体都是一段天意侵蚀的证据</p>
+</div>
+
+<div id="toolbar">
+  <div class="btn" id="btn-play">▶ 漫游</div>
+  <div class="btn" id="btn-reset">⟳ 复位</div>
+  <div class="btn on" id="btn-all">全部</div>
+  <div class="btn" id="btn-pop">🔥 出圈</div>
+  <div class="btn" id="btn-r9">★ R9捧红</div>
+</div>
+
+<div id="legend">
+  <b>图例</b>
+  <div class="row"><span class="dot" style="background:var(--wei)"></span>魏 · 曹操系</div>
+  <div class="row"><span class="dot" style="background:var(--shu)"></span>蜀 · 刘备系</div>
+  <div class="row"><span class="dot" style="background:var(--wu)"></span>吴 · 孙权系</div>
+  <div class="row"><span class="dot" style="background:var(--qun)"></span>群像 · 其他势力</div>
+  <div class="row"><span class="dot" style="background:var(--jizhi)"></span>天意机制</div>
+  <div class="row"><span class="dot" style="background:var(--zahu)"></span>服化道 / 拍摄</div>
+  <div class="row"><span class="dot" style="background:var(--cast)"></span>演员 / 幕后</div>
+  <hr style="border-color:#26334d;margin:6px 0">
+  <div class="row"><span class="line-sample" style="border-color:#ff6b6b"></span>回旋镖</div>
+  <div class="row"><span class="line-sample" style="border-color:#ffa94d"></span>互文</div>
+  <div class="row"><span class="line-sample" style="border-color:#51cf66"></span>天意修正</div>
+  <div class="row"><span class="line-sample" style="border-color:#4dabf7"></span>兼用卡</div>
+  <div class="row"><span class="line-sample" style="border-color:#da77f2"></span>演员联动</div>
+  <div class="row"><span class="line-sample" style="border-color:#ffe066"></span>原著对比</div>
+  <div class="row"><span class="line-sample" style="border-color:#63e6be"></span>权谋因果</div>
+  <div class="row"><span class="line-sample" style="border-color:#f783ac"></span>二创回授</div>
+  <div class="row" style="margin-top:4px"><span class="dot" style="border:1.6px dashed #2ecc71;background:transparent"></span>绿虚线环 = 已有原片素材,点击可播放</div>
+  <div id="count"></div>
+</div>
+
+<div id="tip"></div>
+
+<div id="hint">
+  <span>🖱️ 拖拽星体=移动位置</span><span>🧲 拖拽空白=平移星图</span><span>🔍 滚轮=缩放</span><span>✖️ 双击星体=解锁回引力场</span><span>⟳ 复位=全部复原</span>
+</div>
+
+<div id="panel">
+  <div class="close" id="panelClose">×</div>
+  <div id="panelBody"></div>
+</div>
+
+<div id="player">
+  <div class="p-close" id="playerClose">×</div>
+  <div class="p-title" id="playerTitle"></div>
+  <div id="playerBody" class="ph">素材剪辑后在此播放。</div>
+</div>
+
+<div id="splash">
+  <div class="big">天<span class="ti">意</span>宇宙</div>
+  <div class="sub">
+    新三国 · 每颗星都是一处被天意侵蚀的证据<br>
+    点击任意星体 · 查看梗档案<br>
+    点击连线 · 读取天意小纸条
+  </div>
+  <div class="enter">进 入 宇 宙</div>
+  <div class="warn">种子版 · 素材(原片语音/视频)待剪辑接入 · 建议 Chrome/Edge 桌面打开</div>
+</div>
+
+<script src="lib/d3.v7.min.js"></script>
+<script src="data/nodes.js"></script>
+<script src="data/links.js"></script>
+<script src="data/clips.js"></script>
+<script>
+(() => {
+"use strict";
+const NODES = window.DATA_NODES || [];
+const LINKS = window.DATA_LINKS || [];
+const CLIPS = window.DATA_CLIPS || {};  // id -> {mp3/mp4} 有素材标记
+const FCOLOR = { wei:"#d4a017", shu:"#c0392b", wu:"#2c7fb8", qun:"#8e44ad", jizhi:"#c8d6e5", zahu:"#5d6d7e", cast:"#e67e22" };
+const TYPE_NAME = { quote:"台词梗", scene:"名场面", mech:"天意机制", prop:"服化道/拍摄", cast:"演员/幕后" };
+const KCOLOR = { hui:"#ff6b6b", hu:"#ffa94d", xiu:"#51cf66", jian:"#4dabf7", yan:"#da77f2", yuan:"#ffe066", quan:"#63e6be", er:"#f783ac" };
+const KNAME = { hui:"回旋镖", hu:"互文", xiu:"天意修正", jian:"兼用卡", yan:"演员联动", yuan:"原著对比", quan:"权谋因果", er:"二创回授" };
+
+// ---------- 星空背景 ----------
+const starCanvas = document.getElementById('starfield');
+const sctx = starCanvas.getContext('2d');
+let stars = [];
+function sizeStars(){ starCanvas.width = innerWidth; starCanvas.height = innerHeight; stars = Array.from({length: Math.min(260, innerWidth*innerHeight/6000)}, () => ({ x:Math.random()*innerWidth, y:Math.random()*innerHeight, r:Math.random()*1.2+.2, s:Math.random()*.3+.05, p:Math.random()*Math.PI*2 })); }
+sizeStars(); addEventListener('resize', sizeStars);
+(function drawStars(){ sctx.clearRect(0,0,innerWidth,innerHeight); for(const st of stars){ st.p += st.s; const tw = .5+Math.sin(st.p)*.4; sctx.globalAlpha = tw*.7; sctx.fillStyle = Math.random()>.7 ? '#9fc3ff' : '#fff'; sctx.beginPath(); sctx.arc(st.x, st.y, st.r, 0, 7); sctx.fill(); } sctx.globalAlpha=1; requestAnimationFrame(drawStars); })();
+
+// ---------- D3 力导向图 ----------
+const svgRoot = d3.select('#graph').append('svg').attr('width','100%').attr('height','100%');
+// 所有图内容放进 gWorld,由 zoom 整体平移/缩放(坐标仍是世界坐标)
+const gWorld = svgRoot.append('g');
+const gLink = gWorld.append('g');
+const gNode = gWorld.append('g');
+const gBlack = gWorld.append('g'); // 中心天意黑洞(单独绘制,不参与力导向)
+
+// 画布平移/缩放:拖空白平移,滚轮缩放,双击空白复位
+const zoom = d3.zoom().scaleExtent([0.25, 6])
+  .filter(ev => !ev.ctrlKey && !ev.button && !(ev.target && ev.target.closest && ev.target.closest('.node, .link')))
+  .on('zoom', ev => gWorld.attr('transform', ev.transform));
+svgRoot.call(zoom).on('dblclick.zoom', null);
+
+// 过滤(默认全部)
+let mode = 'all';
+function applyFilter(){
+  const active = mode==='all' ? NODES : NODES.filter(n => mode==='pop' ? (n.pop||1)>=4 : n.r9);
+  const activeIds = new Set(active.map(n=>n.id));
+  // 中心黑球永远显示
+  activeIds.add('TIYI_CORE');
+  const activeLinks = LINKS.filter(l => activeIds.has(l.source) && activeIds.has(l.target));
+  rebuild(active, activeLinks);
+}
+
+const simulation = d3.forceSimulation()
+  .force('link', d3.forceLink().id(d=>d.id).distance(d=>Math.min(220, 90+180/Math.sqrt((d.source.pop||1)*(d.target.pop||1)+1))))
+  .force('charge', d3.forceManyBody().strength(-240))
+  .force('center', d3.forceCenter(innerWidth/2, innerHeight/2))
+  .force('collide', d3.forceCollide().radius(d=>9+(d.pop||1)*3+4));
+
+function rebuild(nodes, links){
+  // 深拷贝节点,注入半径/颜色/固定中心黑球
+  const vnodes = nodes.map(n => ({ ...n, r: 7+(n.pop||1)*2.6, c: FCOLOR[n.faction]||'#999' }));
+  const vlinks = links.map(l => ({ ...l, lc: KCOLOR[l.kind]||'#777' }));
+  // 天意黑洞中心(固定,id TIYI_CORE)
+  vnodes.push({ id:'TIYI_CORE', name:'天意', x: innerWidth/2, y: innerHeight/2, fx: innerWidth/2, fy: innerHeight/2, r: 46, c:'#aac6ff', core:true });
+
+  simulation.nodes(vnodes);
+  simulation.force('link').links(vlinks);
+  simulation.on('tick', ticked);
+  simulation.alpha(1).restart();
+
+  // --- links ---
+  const link = gLink.selectAll('line').data(vlinks, d=>d.id);
+  link.exit().remove();
+  const linkEnter = link.enter().append('line').attr('class','link').attr('stroke', d=>d.lc).attr('stroke-width',1.2)
+    .on('mouseover', (e,d)=>{ showTip(e, `<span class="k">${KNAME[d.kind]||d.kind} · 天意小纸条</span>${d.note||''}`); })
+    .on('mousemove', e=>moveTip(e))
+    .on('mouseout', hideTip);
+  link.merge(linkEnter);
+
+  // --- nodes ---
+  const node = gNode.selectAll('g.node').data(vnodes, d=>d.id);
+  node.exit().remove();
+  // 节点拖拽:拖动期间钉住(fx/fy=拖动坐标),松手后保持钉住;双击节点/复位可解锁回力导向
+  // 中心"天意"黑洞不参与拖动
+  const drag = d3.drag()
+    .on('start',(e,d)=>{ if(d.core) return; if(!e.active) simulation.alphaTarget(.2).restart(); d.fx=d.x; d.fy=d.y; })
+    .on('drag',(e,d)=>{ if(d.core) return; d.fx=e.x; d.fy=e.y; })
+    .on('end',(e,d)=>{ if(!e.active) simulation.alphaTarget(0); if(!d.core){ d.fx=d.x; d.fy=d.y; } });
+  const nodeEnter = node.enter().append('g').attr('class','node')
+    .call(drag)
+    .on('click', (e,d)=>{ e.stopPropagation(); if(d.id==='TIYI_CORE'){ openCore(); } else { openNode(d); } })
+    .on('dblclick', (e,d)=>{ e.stopPropagation(); d.fx=null; d.fy=null; simulation.alpha(.4).restart(); });
+  nodeEnter.append('circle').attr('class','core').attr('r', d=>d.r).attr('fill', d=>d.c).attr('fill-opacity', d=>d.core?.55:0.85)
+    .attr('stroke','#0a0f1e').attr('stroke-width',1.5);
+  // 有素材节点:加一圈绿色脉冲环(可播放标记)
+  nodeEnter.filter(d => CLIPS[d.id] && (CLIPS[d.id].mp3 || CLIPS[d.id].mp4))
+    .append('circle').attr('class','ready')
+    .attr('r', d=>d.r+3).attr('fill','none').attr('stroke','#2ecc71').attr('stroke-width',1.6)
+    .attr('stroke-dasharray','3 2').style('opacity',.9);
+  // 光环(机制/天意周边)
+  nodeEnter.append('circle').attr('class','halo').attr('r', d=>d.r+4+(d.pop||0)*0.4).attr('stroke', d=>d.c).style('opacity',0)
+  nodeEnter.append('text').attr('class','lbl').attr('dy', d=>d.r+11).attr('text-anchor','middle').text(d=>d.core?'天意':d.name);
+  node.merge(nodeEnter).select('circle.core').attr('r', d=>d.r).attr('fill', d=>d.c);
+  node.merge(nodeEnter).select('text.lbl').text(d=>d.core?'天意':d.name);
+
+  // 光环脉冲只给天意核心
+  gBlack.selectAll('circle').remove();
+  gBlack.selectAll('circle').data([0]).join('circle').attr('r',46).attr('fill','none')
+    .attr('stroke','#7aa2ff').attr('stroke-width',2).style('opacity',.8)
+    .attr('cx', innerWidth/2).attr('cy', innerHeight/2);
+
+  function ticked(){
+    linkEnter.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    nodeEnter.attr('transform',d=>`translate(${d.x},${d.y})`);
+    link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    node.attr('transform',d=>`translate(${d.x},${d.y})`);
+  }
+}
+// 重新布局时窗口中心更新
+addEventListener('resize', ()=>{ simulation.force('center').x(innerWidth/2).y(innerHeight/2); simulation.alpha(.3).restart(); gBlack.selectAll('circle').attr('cx',innerWidth/2).attr('cy',innerHeight/2); });
+
+// ---------- 面板 ----------
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function openPanel(html){
+  document.getElementById('panelBody').innerHTML = html;
+  document.getElementById('panel').classList.add('open');
+}
+document.getElementById('panelClose').onclick = ()=>document.getElementById('panel').classList.remove('open');
+
+function typeTag(n){ return `<span class="tag" style="color:${n.c};border-color:${n.c}66">${TYPE_NAME[n.type]||n.type}</span>`; }
+function factionName(f){ return {wei:'魏·曹操系',shu:'蜀·刘备系',wu:'吴·孙权系',qun:'群像·其他势力',jizhi:'天意机制',zahu:'服化道/拍摄',cast:'演员/幕后'}[f]||f; }
+
+function openNode(d){
+  let html = `<h2>${esc(d.name)}</h2><div class="sub">${typeTag(d)} <span class="tag" style="color:${d.c};border-color:${d.c}66">${factionName(d.faction)}</span> 出圈度:${'●'.repeat(Math.min(5,d.pop||1))}${'○'.repeat(Math.max(0,5-(d.pop||1)))}</div>`;
+  if(d.actor) html += `<div class="field"><b>说话人</b> · ${esc(d.actor)}</div>`;
+  if(d.ep) html += `<div class="field"><b>出处</b> · ${esc(d.ep)}</div>`;
+  if(d.line) html += `<div class="quote-block">“${esc(d.line)}”</div>`;
+  if(d.why) html += `<div class="field"><b>为什么是梗</b><br>${esc(d.why)}</div>`;
+  if(d.contrast) html += `<div class="field"><b>原著对比</b><br><span class="muted">${esc(d.contrast)}</span></div>`;
+  if(d.r9) html += `<div class="field">★ <b>被R9/二创捧红</b></div>`;
+  const hasClip = CLIPS[d.id] && (CLIPS[d.id].mp3 || CLIPS[d.id].mp4);
+  html += `<div class="field"><b>素材播放</b><br>`;
+  html += hasClip
+    ? `<button class="btn" onclick="window.__play('${esc(d.id)}')">▶ 播放原片片段</button>`
+    : `<span class="muted" style="font-size:12px">⏳ 素材待剪辑(定位后在 clips/ 放 ${esc(d.id)}.mp3/.mp4 即自动生效)</span>`;
+  html += `</div>`;
+  html += `<div class="field" style="font-size:12px;color:#5a6478">节点ID: ${esc(d.id)} · 剪辑文件名: clips/${esc(d.id)}.mp3/.mp4</div>`;
+  openPanel(html);
+}
+function openCore(){
+  openPanel(`<h2>天意</h2><div class="sub"><span class="tag" style="color:#aac6ff;border-color:#aac6ff66">宇宙核心 · 机制之源</span></div>
+  <div class="quote-block">“从这一刻起，历史发生了剧变。”</div>
+  <div class="field"><b>天意说</b><br>新三一切OOC、降智、前后矛盾、硬跳原著,都可解释为角色被“天意”(编剧朱苏进的大手)侵蚀。该理论由B站UP主“吃蛋挞的折棒”系统化提出,是“新三吐槽赛道”的世界观基石。</div>
+  <div class="field"><b>辐射的机制</b><br>骄兵必败(ELO)、窃听定律、传送门、中立伏兵、火焰流星雨、灵魂锁链……都是天意保证这个荒诞世界“自洽运行”的底层规则。</div>`);
+}
+
+// ---------- 播放(依据 data/clips.js 素材清单,兼容 file:// 双击打开) ----------
+window.__play = (id)=>{
+  const d = NODES.find(n=>n.id===id);
+  const player = document.getElementById('player');
+  const body = document.getElementById('playerBody');
+  document.getElementById('playerTitle').textContent = (d?d.name:'')+' · 原片片段';
+  const meta = CLIPS[id] || {};
+  const videoFile = `clips/${id}.mp4`; const audioFile = `clips/${id}.mp3`;
+  if (meta.mp4) { body.innerHTML = `<video controls autoplay loop src="${videoFile}"></video>`; }
+  else if (meta.mp3) { body.innerHTML = `<audio controls autoplay src="${audioFile}"></audio>`; }
+  else { body.innerHTML = `<span class="ph">该梗素材未剪辑。<br>命名 <b>${id}.mp3</b>(语音)或 <b>${id}.mp4</b>(视频) 放入 clips/ 后刷新即可。</span>`; }
+  player.style.display='block';
+};
+document.getElementById('playerClose').onclick = ()=>{ document.getElementById('player').style.display='none'; const b=document.getElementById('playerBody'); b.innerHTML=''; };
+
+// ---------- tip ----------
+const tipEl = document.getElementById('tip');
+function showTip(e,h){ tipEl.innerHTML=h; tipEl.style.display='block'; moveTip(e); }
+function moveTip(e){ const t=tipEl.getBoundingClientRect(); let x=e.clientX+14,y=e.clientY+16; if(x+t.width>innerWidth-8)x=e.clientX-t.width-14; if(y+t.height>innerHeight-8)y=e.clientY-t.height-14; tipEl.style.left=x+'px'; tipEl.style.top=y+'px'; }
+function hideTip(){ tipEl.style.display='none'; }
+
+// ---------- 漫游模式(沿剧情链自动聚焦) ----------
+let roamTimer=null, roamIdx=0;
+const ROAM_ORDER = ['tiyi','jiaobing','cao-gai','cao-buke','cao-ku','xunyu','liubei-zijin','guanyu-zhonger','sunce-chengdi','wangyun-shengsi','zhugeliang-huo','simayi-silun','sunquan-yi','panfeng','xingdaorong','wujiaosha','tiyi'];
+document.getElementById('btn-play').onclick = ()=>{
+  const b=document.getElementById('btn-play');
+  if(roamTimer){ clearInterval(roamTimer); roamTimer=null; b.textContent='▶ 漫游'; b.classList.remove('on'); return; }
+  b.textContent='⏸ 停止'; b.classList.add('on'); roamIdx=0;
+  roamTimer=setInterval(()=>{
+    const id=ROAM_ORDER[roamIdx%ROAM_ORDER.length]; roamIdx++;
+    const d = simulation.nodes().find(n=>n.id===id);
+    if(d){
+      const k = d3.zoomTransform(svgRoot.node()).k || 1;
+      svgRoot.transition().duration(900).call(zoom.transform, d3.zoomIdentity.translate(innerWidth/2, innerHeight/2).scale(k).translate(-d.x, -d.y));
+      const real = NODES.find(x=>x.id===id); if(real) openNode(real);
+    }
+  }, 2600);
+};
+
+// ---------- 筛选按钮 ----------
+document.getElementById('btn-all').onclick=()=>{ mode='all'; paintBtns(); applyFilter(); };
+document.getElementById('btn-pop').onclick=()=>{ mode='pop'; paintBtns(); applyFilter(); };
+document.getElementById('btn-r9').onclick=()=>{ mode='r9'; paintBtns(); applyFilter(); };
+function paintBtns(){ document.querySelectorAll('#toolbar .btn').forEach(b=>b.classList.remove('on')); const map={all:'btn-all',pop:'btn-pop',r9:'btn-r9'}; document.getElementById(map[mode]).classList.add('on'); }
+
+// ---------- 复位(重置视角 + 解锁所有被拖动的节点) ----------
+document.getElementById('btn-reset').onclick=()=>{
+  simulation.nodes().forEach(n=>{ if(!n.core){ n.fx=null; n.fy=null; } });
+  svgRoot.transition().duration(600).call(zoom.transform, d3.zoomIdentity);
+  applyFilter();
+};
+
+// ---------- 计数 ----------
+document.getElementById('count').textContent = `共 ${NODES.length} 个梗节点 · ${LINKS.length} 条天意线(种子版)`;
+
+// ---------- 开场 ----------
+document.getElementById('splash').onclick = ()=>{ document.getElementById('splash').style.display='none'; applyFilter(); };
+})();
+</script>
+</body>
+</html>

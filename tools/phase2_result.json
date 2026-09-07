@@ -1,0 +1,423 @@
+{
+ "have": [
+  {
+   "id": "xunyu-dao",
+   "name": "一者为主公悲伤,二者给主公道喜",
+   "pop": 3,
+   "cands": [
+    {
+     "ep": 11,
+     "min": 225,
+     "rate": 0.4,
+     "hits": 1
+    }
+   ]
+  },
+  {
+   "id": "liubei-yuele",
+   "name": "接着奏乐,接着舞",
+   "pop": 5,
+   "cands": [
+    {
+     "ep": 55,
+     "min": 270,
+     "rate": 0.4,
+     "hits": 1
+    }
+   ]
+  },
+  {
+   "id": "liuchan",
+   "name": "啊,真的吗?",
+   "pop": 3,
+   "cands": [
+    {
+     "ep": 9,
+     "min": 1935,
+     "rate": 0.125,
+     "hits": 1
+    }
+   ]
+  }
+ ],
+ "none": [
+  {
+   "id": "cao-gai",
+   "name": "曹操盖饭·这就不奇怪了",
+   "pop": 5,
+   "cands": []
+  },
+  {
+   "id": "cao-buke",
+   "name": "不可能!绝对不可能!",
+   "pop": 5,
+   "cands": []
+  },
+  {
+   "id": "cao-xuzhou",
+   "name": "徐州原本就是我的(哒)!",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "cao-woai",
+   "name": "我爱死他了",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "cao-yisheng",
+   "name": "医死的人越多医术越高明",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "cao-erer",
+   "name": "二言绝句(短歌行)",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "cao-ku",
+   "name": "曹操哭爹(呱~)",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "cao-tan",
+   "name": "弹指神通",
+   "pop": 2,
+   "cands": []
+  },
+  {
+   "id": "cao-chunqiu",
+   "name": "春秋胡言乱语",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "cao-yiyoujiu",
+   "name": "听你讲话如饮美酒",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "cao-shagou",
+   "name": "曹操狗叫",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "caoren-yige",
+   "name": "南郡城就留你一人坚守!",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "caoren-qiao",
+   "name": "大乔归我,小乔留给丞相配房",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "xunyu",
+   "name": "徐州城不愧为中原第一雄关",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "simayi-silun",
+   "name": "直奔诸葛亮四轮儿车!!!",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "simayi-momo",
+   "name": "万万没有此事啊!",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "simayi-bingwei",
+   "name": "我都病危十几年了!",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "simayi-zhang",
+   "name": "化骨绵掌(大都督无恙否)",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "sizhao",
+   "name": "风萧萧兮易水寒(上方谷唱歌)",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "liubei-zijin",
+   "name": "战至最后一刻,自刎归天",
+   "pop": 5,
+   "cands": []
+  },
+  {
+   "id": "liubei-erdi",
+   "name": "不可能!我二弟天下无敌!",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "liubei-lei",
+   "name": "这雷把我吓死了",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "liubei-long",
+   "name": "风从虎云从龙,龙虎英雄傲苍穹",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "liubei-renyi",
+   "name": "仁之剑,义之剑",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "liubei-wangqing",
+   "name": "我活在马上,她活在梦里",
+   "pop": 2,
+   "cands": []
+  },
+  {
+   "id": "liubei-wuqin",
+   "name": "可别逼我使出无情剑(洞房舞剑)",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "guanyu-zhonger",
+   "name": "龙,可是帝王之征啊",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "liubei-zalong",
+   "name": "扎聋我自己的耳朵(再三聋)",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "guanyu-bei",
+   "name": "杯酒斩华雄",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "guanyu-daduan",
+   "name": "关某的大刀不斩老幼",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "guanyu-dazhan",
+   "name": "来,换大盏!(关大盏)",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "guanyu-dafeng",
+   "name": "大风车(刮骨疗毒转手臂)",
+   "pop": 2,
+   "cands": []
+  },
+  {
+   "id": "zhangfei-kulong",
+   "name": "捅他一万个透明窟窿",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "zhangfei-sha",
+   "name": "我看你是舍不得这张帅案吧",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "zhaoyun-zhuzi",
+   "name": "我便一头撞死在这柱子上!",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "zhugeliang-bai",
+   "name": "百分之百可信",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "zhugeliang-huo",
+   "name": "好火啊,比夷陵之火还好啊",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "zhugeliang-tianyi",
+   "name": "天意所至,你想不胜都难",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "sunce-chengdi",
+   "name": "恭喜爹可以称帝了!",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "sunce-buxu",
+   "name": "竟然不许!?",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "sunce-zhangma",
+   "name": "战马攻城",
+   "pop": 2,
+   "cands": []
+  },
+  {
+   "id": "sunquan-shizhu",
+   "name": "这江东到底你是主还是我是主",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "sunquan-yi",
+   "name": "议一下吧",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "zhouyu-juelun",
+   "name": "此曲堪称绝伦(周绝伦)",
+   "pop": 2,
+   "cands": []
+  },
+  {
+   "id": "huanggai",
+   "name": "周瑜!我的小儿!",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "lvmeng-heiyi",
+   "name": "黑衣渡江(两栖蜘蛛侠)",
+   "pop": 2,
+   "cands": []
+  },
+  {
+   "id": "lushu-zuile",
+   "name": "我也是醉了(鲁肃)",
+   "pop": 2,
+   "cands": []
+  },
+  {
+   "id": "luxun-shanliang",
+   "name": "夷陵山脉最后一道山梁",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "wangyun-shengsi",
+   "name": "生死不明,那就是死了",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "dongzhuo-suan",
+   "name": "咱家说了咱家不怕酸",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "dongzhuo-yecao",
+   "name": "车轮下的野草,石头缝里的黄连",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "lubu-minggen",
+   "name": "她是我的命根子",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "shenchan",
+   "name": "神貂侠吕(凤凰涅槃)",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "chenggong-chongchong",
+   "name": "我那些个蛐蛐个个有情有义",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "wujiaosha",
+   "name": "一对笑面虎,两头乌角鲨",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "liusan",
+   "name": "我部悍将刘三刀",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "panfeng",
+   "name": "我的大斧早就饥渴难耐了",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "xingdaorong",
+   "name": "说出吾名,吓汝一跳",
+   "pop": 4,
+   "cands": []
+  },
+  {
+   "id": "chishenme",
+   "name": "吃什么(你走了我们吃什么)",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "yuanwen-liuzhu",
+   "name": "列位诸公…告老还乡",
+   "pop": 3,
+   "cands": []
+  },
+  {
+   "id": "tianfeng",
+   "name": "恨天剑法(星光剑圣)",
+   "pop": 2,
+   "cands": []
+  },
+  {
+   "id": "wangyun-jiri",
+   "name": "今天不是老夫的生日,而是忌日",
+   "pop": 2,
+   "cands": []
+  },
+  {
+   "id": "liuxie",
+   "name": "你比董卓他们英雄十倍",
+   "pop": 2,
+   "cands": []
+  }
+ ]
+}

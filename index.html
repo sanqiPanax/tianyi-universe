@@ -177,7 +177,7 @@
     点击连线 · 读取天意小纸条
   </div>
   <div class="enter">进 入 宇 宙</div>
-  <div class="warn">种子版 · 素材(原片语音/视频)待剪辑接入 · 建议 Chrome/Edge 桌面打开</div>
+  <div class="warn">81 个梗可点击试听/观看 · 建议 Chrome/Edge 桌面打开</div>
 </div>
 
 <script src="lib/d3.v7.min.js"></script>
@@ -362,9 +362,14 @@ function toast(msg){
 }
 
 // ---------- 播放:支持 "ep + 秒" 直接定位到源片(需本地有 新三国/ 源文件) ----------
+const ONLINE = /^https?:$/.test(location.protocol); // 线上(GitHub Pages等):无整集源片
 window.__playAt = (ep, sec)=>{
   const n = parseInt(ep.replace(/\D/g,''),10);
   if(!n || n<1 || n>95) return;
+  if(ONLINE){
+    toast(`第${n}集 ${sec}s · 线上版不含整集源片(版权),此功能需下载源片本地打开`);
+    return;
+  }
   const file = `新三国/新三国${String(n).padStart(2,'0')}.mkv`;
   const player = document.getElementById('player');
   const body = document.getElementById('playerBody');
@@ -467,8 +472,8 @@ window.goNode = (id)=>{
 window.playScript = (ep, sec)=>{
   searchRes.style.display='none';
   const n = ep.replace('ep','');
-  const file = `新三国/新三国${n}.mkv`;
-  toast(`正在从第 <b>${n}</b> 集 <b>${sec}s</b> 定位播放…`);
+  if(ONLINE) toast(`第 <b>${n}</b> 集 <b>${sec}s</b> · 线上版已标注位置;下载源片本地打开可整集定位播放`);
+  else toast(`正在从第 <b>${n}</b> 集 <b>${sec}s</b> 定位播放…`);
   window.__playAt(ep, sec);
 };
 searchInput.addEventListener('input', ()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(runSearch, 160); });

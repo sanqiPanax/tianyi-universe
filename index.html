@@ -60,29 +60,37 @@
   #player .p-close:hover{color:#fff}
   #player .ph{font-size:12px;color:#8a93a6;line-height:1.5}
   #count{font-size:11px;color:var(--muted);margin-top:8px}
-  /* 台词/梗搜索框 */
-  #searchWrap{position:relative}
-  #searchInput{width:168px;font-size:12px;padding:5px 11px;border-radius:14px;border:1px solid #33415e;
-    background:#0d1424e6;color:#cdd6e4;outline:none;transition:.15s}
-  #searchInput::placeholder{color:#5a6478}
-  #searchInput:focus{border-color:#7aa2ff;box-shadow:0 0 8px #3555b3aa;width:210px}
-  #searchRes{position:absolute;top:32px;right:0;width:350px;max-width:88vw;max-height:430px;overflow-y:auto;
-    background:#0b1020f7;border:1px solid #3c4f77;border-radius:10px;display:none;font-size:12px;z-index:30;
-    box-shadow:0 8px 26px #000d;backdrop-filter:blur(4px)}
+  /* 台词/梗搜索框 —— 顶部居中,固定定位,保证可点(z 高于 graph) */
+  #searchWrap{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:6;
+    width:min(460px, calc(100vw - 300px))}
+  #searchInput{width:100%;font-size:14px;padding:9px 18px;border-radius:22px;border:1.5px solid #4a6bc9;
+    background:#0d1424f5;color:#e9edf6;outline:none;letter-spacing:.4px;transition:.2s;
+    box-shadow:0 2px 20px rgba(60,100,220,.28), inset 0 0 0 1px rgba(255,255,255,.03)}
+  #searchInput::placeholder{color:#78849c;font-size:13px}
+  #searchInput:focus{border-color:#7aa2ff;background:#101a30;
+    box-shadow:0 0 0 3px rgba(122,162,255,.22), 0 2px 20px rgba(70,110,220,.45)}
+  #searchRes{position:absolute;top:48px;left:50%;transform:translateX(-50%);width:min(620px,94vw);
+    max-height:430px;overflow-y:auto;background:#0b1020f7;border:1px solid #3c4f77;border-radius:12px;
+    display:none;font-size:12px;z-index:30;box-shadow:0 10px 30px #000d;backdrop-filter:blur(4px)}
   .res-group{color:#7aa2ff;padding:6px 12px 3px;font-weight:600;font-size:11px;letter-spacing:1px;
     border-top:1px solid #16233f;position:sticky;top:0;background:#0b1020f7}
   .res-group:first-child{border-top:none}
   .res-item{display:block;width:100%;text-align:left;border:none;background:none;cursor:pointer;
-    padding:6px 12px;color:#cdd6e4;line-height:1.55;font-size:12px;font-family:inherit}
-  .res-item:hover{background:#16233f}
+    padding:7px 14px;color:#cdd6e4;line-height:1.55;font-size:13px;font-family:inherit}
+  .res-item:hover,.res-item.hover{background:#16233f}
   .res-item .t{color:#eef2fa}
   .res-item .m{color:#8a93a6;font-size:11px;display:block}
   .res-item .hl{color:#ffd479}
   .res-more{color:#5a6478;padding:3px 12px 9px;font-size:11px}
+  /* 键盘导航高亮 */
+  #searchRes .res-item.cur{background:#1d2f55;outline:1px solid #4a6bc966}
   #toast{position:fixed;left:50%;bottom:58px;transform:translateX(-50%);z-index:40;background:#1b2b4df5;
     border:1px solid #7aa2ff;color:#eaf1ff;font-size:12px;padding:8px 16px;border-radius:14px;
     box-shadow:0 4px 18px #000c;display:none;max-width:80vw;line-height:1.6}
-  @media(max-width:720px){ #searchRes{right:auto;left:0} }
+  @media(max-width:860px){
+    #searchWrap{top:auto;bottom:14px;width:min(520px, calc(100vw - 32px));left:50%}
+    #searchRes{top:auto;bottom:50px}
+  }
   /* 开场 */
   #splash{position:fixed;inset:0;z-index:20;background:radial-gradient(ellipse at center,#0a1022 0%,#03050c 70%);
     display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;text-align:center;padding:20px}
@@ -429,10 +437,10 @@ function runSearch(){
     h = `<div class="res-more" style="padding:14px 12px">无命中。试试演员名 / 台词词 / 梗名。</div>`;
   }
   if(nodeHits.length){
-    h += `<div class="res-group">梗节点 ${nodeHits.length}</div>`;
+    h += `<div class="res-group">梗节点 ${nodeHits.length} <span class="m" style="display:inline">(回车直达)</span></div>`;
     for(const n of nodeHits.slice(0,8)){
       const clipMark = (CLIPS[n.id] && (CLIPS[n.id].mp3||CLIPS[n.id].mp4)) ? ' 🎵' : '';
-      h += `<button class="res-item" onclick="goNode('${esc(n.id)}')">
+      h += `<button class="res-item" data-kind="node" onclick="goNode('${esc(n.id)}')">
         <span class="t">${hl(n.name,kw)}${clipMark}</span>
         <span class="m">${esc((n.actor||'')+' · '+(n.ep||''))}</span>
         ${n.line?`<span class="m">${hl(n.line,kw)}</span>`:''}
@@ -443,7 +451,7 @@ function runSearch(){
   if(scriptHits.length){
     h += `<div class="res-group">原片台词(第${(scriptHits[0].ep||'').replace('ep','')}集起…)</div>`;
     for(const s of scriptHits.slice(0,10)){
-      h += `<button class="res-item" onclick="playScript('${s.ep}','${s.sec}')">
+      h += `<button class="res-item" data-kind="script" onclick="playScript('${s.ep}','${s.sec}')">
         <span class="t">${hl(s.txt,kw)}</span>
         <span class="m">第${s.ep.replace('ep','')}集 · ${s.sec}s · 点击定位播放</span>
       </button>`;
@@ -452,7 +460,29 @@ function runSearch(){
   }
   box.innerHTML = h;
   box.style.display = 'block';
+  // 默认光标停在第一个"梗节点"上(回车即跳转);无节点命中则停第一条
+  curIdx = -1;
+  moveCur(1);
 }
+// 键盘上下移动光标 / 回车触发
+let curIdx = -1;
+function items(){ return Array.prototype.slice.call(searchRes.querySelectorAll('.res-item')); }
+function moveCur(dir){
+  const it = items();
+  if(!it.length){ curIdx=-1; return; }
+  if(dir===1){ // 下/首
+    curIdx = (curIdx + 1) % it.length;
+  } else if(dir===-1){
+    curIdx = curIdx<=0 ? it.length-1 : curIdx-1;
+  } else { // 跳到第一个 node(回车直达用)
+    const ni = it.findIndex(x=>x.dataset.kind==='node');
+    curIdx = ni>=0 ? ni : 0;
+  }
+  it.forEach((x,i)=>x.classList.toggle('cur', i===curIdx));
+  const cur = it[curIdx];
+  if(cur && cur.scrollIntoView) cur.scrollIntoView({block:'nearest'});
+}
+function hitCur(){ const it=items(); if(it[curIdx]) it[curIdx].click(); }
 // 命中梗节点:关搜索框 → 复位/聚焦该星体 → 开档案
 window.goNode = (id)=>{
   searchRes.style.display='none'; searchInput.value='';
@@ -478,7 +508,18 @@ window.playScript = (ep, sec)=>{
 };
 searchInput.addEventListener('input', ()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(runSearch, 160); });
 searchInput.addEventListener('keydown', (e)=>{
-  if(e.key==='Enter'){ runSearch(); const first=searchRes.querySelector('.res-item'); if(first) first.click(); }
+  if(e.key==='Enter'){
+    e.preventDefault();
+    if(searchRes.style.display==='none'){ runSearch(); }
+    // 有内容则回车直达:优先当前光标项;无光标(刚回车生成)则跳第一个梗节点
+    if(items().length){
+      if(curIdx>=0){ hitCur(); }
+      else { moveCur(0); hitCur(); }
+    }
+    return;
+  }
+  if(e.key==='ArrowDown'){ e.preventDefault(); if(searchRes.style.display==='block') moveCur(1); else { runSearch(); moveCur(0); } }
+  if(e.key==='ArrowUp'){ e.preventDefault(); if(searchRes.style.display==='block') moveCur(-1); }
   if(e.key==='Escape'){ searchRes.style.display='none'; searchInput.blur(); }
 });
 document.addEventListener('click', (e)=>{

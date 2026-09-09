@@ -11,3 +11,5 @@ tools/_full/
 tools/_test*.wav
 tools/qc.txt
 tools/__pycache__/
+
+__pycache__/

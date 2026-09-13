@@ -83,6 +83,12 @@ body.film .ui{opacity:0 !important;pointer-events:none !important}
 .btn:hover{border-color:var(--jin);color:var(--paper);box-shadow:0 0 12px rgba(201,162,39,.22)}
 .btn.on{background:rgba(201,162,39,.14);border-color:var(--jin);color:#f0e6c8;box-shadow:0 0 14px rgba(201,162,39,.3)}
 .btn.ghost{border-color:#33404f;color:#8a93a6}
+/* 背景音乐开关:开时轻微脉动,让"正在响"这件事看得见 */
+.btn.bgm{border-color:#4a3d1c;color:#d8c98c}
+.btn.bgm i{display:inline-block;animation:bgmPulse 2.6s ease-in-out infinite}
+.btn.bgm.off{border-color:#2c3a4e;color:#6b7488}
+.btn.bgm.off i{animation:none;opacity:.5}
+@keyframes bgmPulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.12);opacity:1}}
 
 /* ---------- 图例 ---------- */
 #legend{

@@ -28,6 +28,7 @@
   <div class="btn bgm" id="btn-bgm"><i>🔊</i><span>关羽之歌</span></div>
   <div class="btn" id="btn-film" title="隐藏所有界面 + 自动巡游 + 只播台词(按 H)"><i>🎬</i><span>播片</span></div>
   <div class="btn" id="btn-play" title="自动巡游高光节点(空格)"><i>▶</i><span>漫游</span></div>
+  <div class="btn" id="btn-fenye" title="分野视图:按二十八宿重排星图(按 G)"><i>⬡</i><span>分野</span></div>
   <div class="btn" id="btn-fit" title="全览星图(按 F)"><i>⤢</i><span>全览</span></div>
   <div class="btn" id="btn-reset" title="复位视角并解锁被拖动的星体(按 R)"><i>⟳</i><span>复位</span></div>
 </div>
@@ -43,7 +44,7 @@
   <div class="row"><span class="dot" style="background:#c9a227"></span>紫微垣 · 魏·曹操系</div>
   <div class="row"><span class="dot" style="background:#c0392b"></span>太微垣 · 蜀·刘备系</div>
   <div class="row"><span class="dot" style="background:#2f7d8f"></span>天市垣 · 吴·孙权系</div>
-  <div class="row"><span class="dot" style="background:#7c5aa8"></span>二十八宿 · 群像</div>
+  <div class="row"><span class="dot" style="background:#7c5aa8"></span>列国 · 群雄</div>
   <div class="row"><span class="dot" style="background:#d8dee9"></span>客星 · 天意机制</div>
   <div class="row"><span class="dot" style="background:#6b6156"></span>荧惑 · 服化道/拍摄</div>
   <div class="row"><span class="dot" style="background:#d98a3d"></span>杂星 · 演员/幕后</div>
@@ -57,14 +58,17 @@
   <div class="row"><span class="line-sample" style="border-color:#4f9b7a"></span>权谋因果</div>
   <div class="row"><span class="line-sample" style="border-color:#c96f9b;border-top-style:dashed"></span>二创回授</div>
   <div class="row" style="margin-top:6px"><span class="dot" style="border:1.2px dashed #5f9e6a;background:transparent"></span>绿虚线圈 = 有原片素材,可播放</div>
-  <div class="note">视觉借古星官之名分组,非史实对应</div>
+  <div class="note">
+    <b style="color:#c9a227;font-weight:600">势力色</b>借古星官之名,属风格化分组。<br>
+    <b style="color:#c9a227;font-weight:600">二十八宿</b>是真实分野对应(州依《汉书·地理志》十二次分野)—— 点顶部 <b>分野</b> 或按 <b>G</b> 查看。
+  </div>
   <div id="count"></div>
 </div>
 
 <div id="tip"></div>
 
 <div id="hint" class="ui">
-  <span>拖拽星体=移动</span><span>拖拽空白=平移</span><span>滚轮=缩放</span><span>点星体=档案+涟漪</span><span>空格=漫游(配关羽之歌)</span><span>H=播片</span><span>F=全览</span>
+  <span>拖拽星体=移动</span><span>拖拽空白=平移</span><span>滚轮=缩放</span><span>点星体=档案+涟漪</span><span>空格=漫游(配关羽之歌)</span><span>G=分野视图</span><span>H=播片</span><span>F=全览</span>
 </div>
 
 <div id="caption"></div>
@@ -103,6 +107,7 @@
 <script src="data/links.js"></script>
 <script src="data/clips.js"></script>
 <script src="data/script_index.js"></script>
+<script src="data/fenye.js"></script>
 <script src="lib/tianyi.js"></script>
 </body>
 </html>

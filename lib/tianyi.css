@@ -295,6 +295,14 @@ circle.glow.lit{opacity:.95}
 .flow{fill:#ffd479;pointer-events:none;filter:drop-shadow(0 0 4px #ffb43c)}
 .ripple{fill:#fff3cf;pointer-events:none;filter:drop-shadow(0 0 6px #ffcf6a)}
 
+/* ---------- 分野视图 ---------- */
+.fenye-guides{opacity:0;transition:opacity .55s ease;pointer-events:none}
+body.fenye .fenye-guides{opacity:1}
+body.fenye .link{opacity:.16}
+body.fenye .link.hot{opacity:.9}
+body.fenye .link.dim{opacity:.05}
+#btn-fenye.on i{transform:rotate(0deg)}
+
 /* ---------- 天意中宫(三环反向旋转 + 呼吸) ---------- */
 @keyframes spinA{to{transform:rotate(360deg)}}
 @keyframes spinB{to{transform:rotate(-360deg)}}

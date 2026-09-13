@@ -19,3 +19,7 @@ __pycache__/
 
 # 一次性截图产物,全库没有任何文件引用它
 tianyi-full.png
+
+# BGM 指纹扫描的工作区(解码出的原始音频,单集 38MB)
+tools/_bgm_work/
+tools/_bgm_chroma/

@@ -1,0 +1,877 @@
+{
+ "ref": {
+  "ep": 34,
+  "t0": 197.0,
+  "t1": 213.0,
+  "hashes": 5235
+ },
+ "results": [
+  {
+   "ep": 1,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 12,
+   "total_hash_hits": 47963,
+   "peaks": 161549
+  },
+  {
+   "ep": 2,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 16,
+   "total_hash_hits": 53724,
+   "peaks": 161959
+  },
+  {
+   "ep": 3,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 12,
+   "total_hash_hits": 52324,
+   "peaks": 171126
+  },
+  {
+   "ep": 4,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 13,
+   "total_hash_hits": 46450,
+   "peaks": 161877
+  },
+  {
+   "ep": 5,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 11,
+   "total_hash_hits": 47742,
+   "peaks": 163497
+  },
+  {
+   "ep": 6,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 13,
+   "total_hash_hits": 53943,
+   "peaks": 172200
+  },
+  {
+   "ep": 7,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 339,
+   "total_hash_hits": 55272,
+   "peaks": 170512
+  },
+  {
+   "ep": 8,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 16,
+   "total_hash_hits": 58468,
+   "peaks": 159260
+  },
+  {
+   "ep": 9,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 81,
+   "total_hash_hits": 49452,
+   "peaks": 158513
+  },
+  {
+   "ep": 10,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 17,
+   "total_hash_hits": 50900,
+   "peaks": 158374
+  },
+  {
+   "ep": 11,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 141,
+   "total_hash_hits": 50563,
+   "peaks": 163322
+  },
+  {
+   "ep": 12,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 13,
+   "total_hash_hits": 52870,
+   "peaks": 170616
+  },
+  {
+   "ep": 13,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 16,
+   "total_hash_hits": 61516,
+   "peaks": 171199
+  },
+  {
+   "ep": 14,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 97,
+   "total_hash_hits": 58391,
+   "peaks": 163101
+  },
+  {
+   "ep": 15,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 38,
+   "total_hash_hits": 57558,
+   "peaks": 169285
+  },
+  {
+   "ep": 16,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 13,
+   "total_hash_hits": 55662,
+   "peaks": 163550
+  },
+  {
+   "ep": 17,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 13,
+   "total_hash_hits": 50499,
+   "peaks": 162474
+  },
+  {
+   "ep": 18,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 15,
+   "total_hash_hits": 66471,
+   "peaks": 173392
+  },
+  {
+   "ep": 19,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 17,
+   "total_hash_hits": 53740,
+   "peaks": 161582
+  },
+  {
+   "ep": 20,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 14,
+   "total_hash_hits": 58807,
+   "peaks": 159136
+  },
+  {
+   "ep": 21,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 15,
+   "total_hash_hits": 47381,
+   "peaks": 157749
+  },
+  {
+   "ep": 22,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 108,
+   "total_hash_hits": 52788,
+   "peaks": 173714
+  },
+  {
+   "ep": 23,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 465,
+   "total_hash_hits": 54978,
+   "peaks": 164541
+  },
+  {
+   "ep": 24,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 16,
+   "total_hash_hits": 52410,
+   "peaks": 170895
+  },
+  {
+   "ep": 25,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 601,
+   "total_hash_hits": 46639,
+   "peaks": 160945
+  },
+  {
+   "ep": 26,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 12,
+   "total_hash_hits": 50150,
+   "peaks": 161284
+  },
+  {
+   "ep": 27,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 122,
+   "total_hash_hits": 59004,
+   "peaks": 174835
+  },
+  {
+   "ep": 28,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 12,
+   "total_hash_hits": 52719,
+   "peaks": 174392
+  },
+  {
+   "ep": 29,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 12,
+   "total_hash_hits": 48930,
+   "peaks": 163051
+  },
+  {
+   "ep": 30,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 276,
+   "total_hash_hits": 62238,
+   "peaks": 171755
+  },
+  {
+   "ep": 31,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 25,
+   "total_hash_hits": 61420,
+   "peaks": 172558
+  },
+  {
+   "ep": 32,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 702,
+   "total_hash_hits": 60449,
+   "peaks": 175318
+  },
+  {
+   "ep": 33,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 328,
+   "total_hash_hits": 59764,
+   "peaks": 163059
+  },
+  {
+   "ep": 34,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 550,
+   "total_hash_hits": 72340,
+   "peaks": 163359
+  },
+  {
+   "ep": 35,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 574,
+   "total_hash_hits": 61061,
+   "peaks": 160417
+  },
+  {
+   "ep": 36,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 12,
+   "total_hash_hits": 60773,
+   "peaks": 177355
+  },
+  {
+   "ep": 37,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 15,
+   "total_hash_hits": 63702,
+   "peaks": 161224
+  },
+  {
+   "ep": 38,
+   "votes": 803,
+   "second": 0,
+   "segments": [
+    {
+     "start": 1911.1,
+     "end": 1927.1,
+     "votes": 803
+    }
+   ],
+   "max_votes": 803,
+   "total_hash_hits": 73172,
+   "peaks": 163988
+  },
+  {
+   "ep": 39,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 17,
+   "total_hash_hits": 62131,
+   "peaks": 159753
+  },
+  {
+   "ep": 40,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 387,
+   "total_hash_hits": 55143,
+   "peaks": 163137
+  },
+  {
+   "ep": 41,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 560,
+   "total_hash_hits": 58590,
+   "peaks": 161599
+  },
+  {
+   "ep": 42,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 231,
+   "total_hash_hits": 52697,
+   "peaks": 174709
+  },
+  {
+   "ep": 43,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 16,
+   "total_hash_hits": 56160,
+   "peaks": 163131
+  },
+  {
+   "ep": 44,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 13,
+   "total_hash_hits": 61601,
+   "peaks": 163819
+  },
+  {
+   "ep": 45,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 16,
+   "total_hash_hits": 66689,
+   "peaks": 160603
+  },
+  {
+   "ep": 46,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 109,
+   "total_hash_hits": 60742,
+   "peaks": 166827
+  },
+  {
+   "ep": 47,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 13,
+   "total_hash_hits": 61055,
+   "peaks": 167128
+  },
+  {
+   "ep": 48,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 13,
+   "total_hash_hits": 54392,
+   "peaks": 161019
+  },
+  {
+   "ep": 49,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 613,
+   "total_hash_hits": 57049,
+   "peaks": 164265
+  },
+  {
+   "ep": 50,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 585,
+   "total_hash_hits": 63156,
+   "peaks": 162623
+  },
+  {
+   "ep": 51,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 20,
+   "total_hash_hits": 66441,
+   "peaks": 164057
+  },
+  {
+   "ep": 52,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 12,
+   "total_hash_hits": 59644,
+   "peaks": 161140
+  },
+  {
+   "ep": 53,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 17,
+   "total_hash_hits": 71444,
+   "peaks": 162888
+  },
+  {
+   "ep": 54,
+   "votes": 846,
+   "second": 0,
+   "segments": [
+    {
+     "start": 849.9,
+     "end": 865.9,
+     "votes": 846
+    }
+   ],
+   "max_votes": 846,
+   "total_hash_hits": 74290,
+   "peaks": 162088
+  },
+  {
+   "ep": 55,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 12,
+   "total_hash_hits": 61756,
+   "peaks": 158115
+  },
+  {
+   "ep": 56,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 495,
+   "total_hash_hits": 71324,
+   "peaks": 163127
+  },
+  {
+   "ep": 57,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 644,
+   "total_hash_hits": 62956,
+   "peaks": 161321
+  },
+  {
+   "ep": 58,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 14,
+   "total_hash_hits": 65311,
+   "peaks": 161994
+  },
+  {
+   "ep": 59,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 392,
+   "total_hash_hits": 74618,
+   "peaks": 162181
+  },
+  {
+   "ep": 60,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 12,
+   "total_hash_hits": 53073,
+   "peaks": 171831
+  },
+  {
+   "ep": 61,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 14,
+   "total_hash_hits": 46734,
+   "peaks": 160244
+  },
+  {
+   "ep": 62,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 16,
+   "total_hash_hits": 49170,
+   "peaks": 167340
+  },
+  {
+   "ep": 63,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 521,
+   "total_hash_hits": 62392,
+   "peaks": 169526
+  },
+  {
+   "ep": 64,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 15,
+   "total_hash_hits": 54446,
+   "peaks": 172198
+  },
+  {
+   "ep": 65,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 456,
+   "total_hash_hits": 61037,
+   "peaks": 163829
+  },
+  {
+   "ep": 66,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 14,
+   "total_hash_hits": 51281,
+   "peaks": 161124
+  },
+  {
+   "ep": 67,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 41,
+   "total_hash_hits": 57965,
+   "peaks": 171915
+  },
+  {
+   "ep": 68,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 318,
+   "total_hash_hits": 57054,
+   "peaks": 164071
+  },
+  {
+   "ep": 69,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 611,
+   "total_hash_hits": 60103,
+   "peaks": 162498
+  },
+  {
+   "ep": 70,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 307,
+   "total_hash_hits": 62429,
+   "peaks": 173056
+  },
+  {
+   "ep": 71,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 69,
+   "total_hash_hits": 60792,
+   "peaks": 162010
+  },
+  {
+   "ep": 72,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 93,
+   "total_hash_hits": 50678,
+   "peaks": 166257
+  },
+  {
+   "ep": 73,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 16,
+   "total_hash_hits": 71847,
+   "peaks": 172999
+  },
+  {
+   "ep": 74,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 14,
+   "total_hash_hits": 63225,
+   "peaks": 158548
+  },
+  {
+   "ep": 75,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 125,
+   "total_hash_hits": 67681,
+   "peaks": 158216
+  },
+  {
+   "ep": 76,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 29,
+   "total_hash_hits": 72420,
+   "peaks": 173644
+  },
+  {
+   "ep": 77,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 28,
+   "total_hash_hits": 64636,
+   "peaks": 163317
+  },
+  {
+   "ep": 78,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 527,
+   "total_hash_hits": 62626,
+   "peaks": 162627
+  },
+  {
+   "ep": 79,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 14,
+   "total_hash_hits": 60212,
+   "peaks": 174769
+  },
+  {
+   "ep": 80,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 28,
+   "total_hash_hits": 55957,
+   "peaks": 161963
+  },
+  {
+   "ep": 81,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 19,
+   "total_hash_hits": 64070,
+   "peaks": 160436
+  },
+  {
+   "ep": 82,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 15,
+   "total_hash_hits": 61572,
+   "peaks": 172262
+  },
+  {
+   "ep": 83,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 14,
+   "total_hash_hits": 67635,
+   "peaks": 162281
+  },
+  {
+   "ep": 84,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 20,
+   "total_hash_hits": 59910,
+   "peaks": 162349
+  },
+  {
+   "ep": 85,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 12,
+   "total_hash_hits": 59507,
+   "peaks": 174016
+  },
+  {
+   "ep": 86,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 16,
+   "total_hash_hits": 64335,
+   "peaks": 162562
+  },
+  {
+   "ep": 87,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 676,
+   "total_hash_hits": 59771,
+   "peaks": 163310
+  },
+  {
+   "ep": 88,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 14,
+   "total_hash_hits": 61429,
+   "peaks": 171840
+  },
+  {
+   "ep": 89,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 13,
+   "total_hash_hits": 52396,
+   "peaks": 162549
+  },
+  {
+   "ep": 90,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 13,
+   "total_hash_hits": 60819,
+   "peaks": 165374
+  },
+  {
+   "ep": 91,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 45,
+   "total_hash_hits": 58053,
+   "peaks": 173760
+  },
+  {
+   "ep": 92,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 21,
+   "total_hash_hits": 54225,
+   "peaks": 164356
+  },
+  {
+   "ep": 93,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 472,
+   "total_hash_hits": 58702,
+   "peaks": 176009
+  },
+  {
+   "ep": 94,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 13,
+   "total_hash_hits": 55892,
+   "peaks": 161917
+  },
+  {
+   "ep": 95,
+   "votes": 0,
+   "second": 0,
+   "segments": [],
+   "max_votes": 19,
+   "total_hash_hits": 60651,
+   "peaks": 172962
+  }
+ ]
+}

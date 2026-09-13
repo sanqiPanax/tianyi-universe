@@ -13,3 +13,6 @@ tools/qc.txt
 tools/__pycache__/
 
 __pycache__/
+
+# 改版前的单文件备份(git 历史里已有,不入库)
+*.bak-*
